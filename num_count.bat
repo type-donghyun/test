@@ -1,18 +1,27 @@
 @ECHO OFF
 CHCP 65001>nul
 
-set t0=%time: =0%
-
 SET /a i=0
-:loop
-
-SET /a i=i+1
-ECHO %i%
-IF %i% equ 10000 (
-	GOTO end
+:enter_num
+ECHO 0부터 1씩 더해 목표 숫자까지 걸리는 시간을 측정합니다.
+ECHO 이는 CPU의 성능에 따라 다른 결과를 도출하며, CPU 성능을 보증하지는 않습니다.
+SET /p a=목표 숫자를 입력하세요: 
+SET /a b=%a%
+CLS
+IF NOT %b% geq 1 (
+	GOTO enter_num
 )
 
+SET t0=%time: =0%
+
+:loop
+SET /a i=i+1
+ECHO %i%
+IF %i% equ %a% (
+	GOTO end
+)
 GOTO loop
+
 :end
 
 SET t=%time: =0%
